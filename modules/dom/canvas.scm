@@ -18,54 +18,55 @@
 ;;;
 ;;; Code:
 
-(library (dom canvas)
-  (export get-context
-          set-fill-color!
-          set-font!
-          set-text-align!
-          clear-rect
-          fill-rect
-          fill-text
-          draw-image
-          set-scale!
-          set-transform!
-          set-image-smoothing-enabled!)
-  (import (scheme base)
-          (hoot ffi))
+(define-module (dom canvas)
+  #:pure
+  #:use-module (scheme base)
+  #:use-module (hoot ffi)
+  #:export (get-context
+            set-fill-color!
+            set-font!
+            set-text-align!
+            clear-rect
+            fill-rect
+            fill-text
+            draw-image
+            set-scale!
+            set-transform!
+            set-image-smoothing-enabled!))
 
-  ;; HTMLCanvasElement
-  (define-foreign get-context
-    "canvas" "getContext"
-    (ref extern) (ref string) -> (ref extern))
+;; HTMLCanvasElement
+(define-foreign get-context
+  "canvas" "getContext"
+  (ref extern) (ref string) -> (ref extern))
 
-  ;; CanvasRenderingContext2D
-  (define-foreign set-fill-color!
-    "canvas" "setFillColor"
-    (ref extern) (ref string) -> none)
-  (define-foreign set-font!
-    "canvas" "setFont"
-    (ref extern) (ref string) -> none)
-  (define-foreign set-text-align!
-    "canvas" "setTextAlign"
-    (ref extern) (ref string) -> none)
-  (define-foreign clear-rect
-    "canvas" "clearRect"
-    (ref extern) f64 f64 f64 f64 -> none)
-  (define-foreign fill-rect
-    "canvas" "fillRect"
-    (ref extern) f64 f64 f64 f64 -> none)
-  (define-foreign fill-text
-    "canvas" "fillText"
-    (ref extern) (ref string) f64 f64 -> none)
-  (define-foreign draw-image
-    "canvas" "drawImage"
-    (ref extern) (ref extern) f64 f64 f64 f64 f64 f64 f64 f64 -> none)
-  (define-foreign set-scale!
-    "canvas" "setScale"
-    (ref extern) f64 f64 -> none)
-  (define-foreign set-transform!
-    "canvas" "setTransform"
-    (ref extern) f64 f64 f64 f64 f64 f64 -> none)
-  (define-foreign set-image-smoothing-enabled!
-    "canvas" "setImageSmoothingEnabled"
-    (ref extern) i32 -> none))
+;; CanvasRenderingContext2D
+(define-foreign set-fill-color!
+  "canvas" "setFillColor"
+  (ref extern) (ref string) -> none)
+(define-foreign set-font!
+  "canvas" "setFont"
+  (ref extern) (ref string) -> none)
+(define-foreign set-text-align!
+  "canvas" "setTextAlign"
+  (ref extern) (ref string) -> none)
+(define-foreign clear-rect
+  "canvas" "clearRect"
+  (ref extern) f64 f64 f64 f64 -> none)
+(define-foreign fill-rect
+  "canvas" "fillRect"
+  (ref extern) f64 f64 f64 f64 -> none)
+(define-foreign fill-text
+  "canvas" "fillText"
+  (ref extern) (ref string) f64 f64 -> none)
+(define-foreign draw-image
+  "canvas" "drawImage"
+  (ref extern) (ref extern) f64 f64 f64 f64 f64 f64 f64 f64 -> none)
+(define-foreign set-scale!
+  "canvas" "setScale"
+  (ref extern) f64 f64 -> none)
+(define-foreign set-transform!
+  "canvas" "setTransform"
+  (ref extern) f64 f64 f64 f64 f64 f64 -> none)
+(define-foreign set-image-smoothing-enabled!
+  "canvas" "setImageSmoothingEnabled"
+  (ref extern) i32 -> none)

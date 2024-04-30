@@ -18,28 +18,29 @@
 ;;;
 ;;; Code:
 
-(library (dom event)
-  (export add-event-listener!
-          remove-event-listener!
-          prevent-default!
-          keyboard-event-code)
-  (import (scheme base)
-          (hoot ffi))
+(define-module (dom event)
+  #:pure
+  #:use-module (scheme base)
+  #:use-module (hoot ffi)
+  #:export (add-event-listener!
+            remove-event-listener!
+            prevent-default!
+            keyboard-event-code))
 
-  ;; EventTarget
-  (define-foreign add-event-listener!
-    "event" "addEventListener"
-    (ref extern) (ref string) (ref extern) -> none)
-  (define-foreign remove-event-listener!
-    "event" "removeEventListener"
-    (ref extern) (ref string) (ref extern) -> none)
+;; EventTarget
+(define-foreign add-event-listener!
+  "event" "addEventListener"
+  (ref extern) (ref string) (ref extern) -> none)
+(define-foreign remove-event-listener!
+  "event" "removeEventListener"
+  (ref extern) (ref string) (ref extern) -> none)
 
-  ;; Event
-  (define-foreign prevent-default!
-    "event" "preventDefault"
-    (ref extern) -> none)
+;; Event
+(define-foreign prevent-default!
+  "event" "preventDefault"
+  (ref extern) -> none)
 
-  ;; KeyboardEvent
-  (define-foreign keyboard-event-code
-    "event" "keyboardCode"
-    (ref extern) -> (ref string)))
+;; KeyboardEvent
+(define-foreign keyboard-event-code
+  "event" "keyboardCode"
+  (ref extern) -> (ref string))

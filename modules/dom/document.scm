@@ -18,27 +18,28 @@
 ;;;
 ;;; Code:
 
-(library (dom document)
-  (export current-document
-          document-body
-          get-element-by-id
-          make-text-node
-          make-element)
-  (import (scheme base)
-          (hoot ffi))
+(define-module (dom document)
+  #:pure
+  #:use-module (scheme base)
+  #:use-module (hoot ffi)
+  #:export (current-document
+            document-body
+            get-element-by-id
+            make-text-node
+            make-element))
 
-  (define-foreign current-document
-    "document" "get"
-    -> (ref extern))
-  (define-foreign document-body
-    "document" "body"
-    -> (ref null extern))
-  (define-foreign get-element-by-id
-    "document" "getElementById"
-    (ref string) -> (ref null extern))
-  (define-foreign make-text-node
-    "document" "createTextNode"
-    (ref string) -> (ref extern))
-  (define-foreign make-element
-    "document" "createElement"
-    (ref string) -> (ref extern)))
+(define-foreign current-document
+  "document" "get"
+  -> (ref extern))
+(define-foreign document-body
+  "document" "body"
+  -> (ref null extern))
+(define-foreign get-element-by-id
+  "document" "getElementById"
+  (ref string) -> (ref null extern))
+(define-foreign make-text-node
+  "document" "createTextNode"
+  (ref string) -> (ref extern))
+(define-foreign make-element
+  "document" "createElement"
+  (ref string) -> (ref extern))

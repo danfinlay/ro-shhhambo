@@ -18,53 +18,54 @@
 ;;;
 ;;; Code:
 
-(library (dom element)
-  (export element-value
-          set-element-value!
-          element-width set-element-width!
-          element-height set-element-height!
-          append-child!
-          remove!
-          replace-with!
-          set-attribute!
-          remove-attribute!
-          clone-element)
-  (import (scheme base)
-          (hoot ffi))
+(define-module (dom element)
+  #:pure
+  #:use-module (scheme base)
+  #:use-module (hoot ffi)
+  #:export (element-value
+            set-element-value!
+            element-width set-element-width!
+            element-height set-element-height!
+            append-child!
+            remove!
+            replace-with!
+            set-attribute!
+            remove-attribute!
+            clone-element))
 
-  (define-foreign element-value
-    "element" "value"
-    (ref extern) -> (ref string))
-  (define-foreign set-element-value!
-    "element" "setValue"
-    (ref extern) (ref string) -> none)
-  (define-foreign element-width
-    "element" "width"
-    (ref extern) -> i32)
-  (define-foreign element-height
-    "element" "height"
-    (ref extern) -> i32)
-  (define-foreign set-element-width!
-    "element" "setWidth"
-    (ref extern) i32 -> none)
-  (define-foreign set-element-height!
-    "element" "setHeight"
-    (ref extern) i32 -> none)
-  (define-foreign append-child!
-    "element" "appendChild"
-    (ref extern) (ref extern) -> (ref extern))
-  (define-foreign remove!
-    "element" "remove"
-    (ref extern) -> none)
-  (define-foreign replace-with!
-    "element" "replaceWith"
-    (ref extern) (ref extern) -> none)
-  (define-foreign set-attribute!
-    "element" "setAttribute"
-    (ref extern) (ref string) (ref string) -> none)
-  (define-foreign remove-attribute!
-    "element" "removeAttribute"
-    (ref extern) (ref string) -> none)
-  (define-foreign clone-element
-    "element" "clone"
-    (ref extern) -> (ref extern)))
+(define-foreign element-value
+  "element" "value"
+  (ref extern) -> (ref string))
+(define-foreign set-element-value!
+  "element" "setValue"
+  (ref extern) (ref string) -> none)
+(define-foreign element-width
+  "element" "width"
+  (ref extern) -> i32)
+(define-foreign element-height
+  "element" "height"
+  (ref extern) -> i32)
+(define-foreign set-element-width!
+  "element" "setWidth"
+  (ref extern) i32 -> none)
+(define-foreign set-element-height!
+  "element" "setHeight"
+  (ref extern) i32 -> none)
+(define-foreign append-child!
+  "element" "appendChild"
+  (ref extern) (ref extern) -> (ref extern))
+(define-foreign remove!
+  "element" "remove"
+  (ref extern) -> none)
+(define-foreign replace-with!
+  "element" "replaceWith"
+  (ref extern) (ref extern) -> none)
+(define-foreign set-attribute!
+  "element" "setAttribute"
+  (ref extern) (ref string) (ref string) -> none)
+(define-foreign remove-attribute!
+  "element" "removeAttribute"
+  (ref extern) (ref string) -> none)
+(define-foreign clone-element
+  "element" "clone"
+  (ref extern) -> (ref extern))

@@ -18,11 +18,12 @@
 ;;;
 ;;; Code:
 
-(library (dom image)
-  (export make-image)
-  (import (scheme base)
-          (hoot ffi))
+(define-module (dom image)
+  #:pure
+  #:use-module (scheme base)
+  #:use-module (hoot ffi)
+  #:export (make-image))
 
-  (define-foreign make-image
-    "image" "new"
-    (ref string) -> (ref extern)))
+(define-foreign make-image
+  "image" "new"
+  (ref string) -> (ref extern))

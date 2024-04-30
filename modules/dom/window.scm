@@ -18,27 +18,28 @@
 ;;;
 ;;; Code:
 
-(library (dom window)
-  (export current-window
-          window-inner-width
-          window-inner-height
-          request-animation-frame
-          timeout)
-  (import (scheme base)
-          (hoot ffi))
+(define-module (dom window)
+  #:pure
+  #:use-module (scheme base)
+  #:use-module (hoot ffi)
+  #:export (current-window
+            window-inner-width
+            window-inner-height
+            request-animation-frame
+            timeout))
 
-  (define-foreign current-window
-    "window" "get"
-    -> (ref extern))
-  (define-foreign window-inner-width
-    "window" "innerWidth"
-    (ref extern) -> i32)
-  (define-foreign window-inner-height
-    "window" "innerHeight"
-    (ref extern) -> i32)
-  (define-foreign request-animation-frame
-    "window" "requestAnimationFrame"
-    (ref extern) -> none)
-  (define-foreign timeout
-    "window" "setTimeout"
-    (ref extern) f64 -> i32))
+(define-foreign current-window
+  "window" "get"
+  -> (ref extern))
+(define-foreign window-inner-width
+  "window" "innerWidth"
+  (ref extern) -> i32)
+(define-foreign window-inner-height
+  "window" "innerHeight"
+  (ref extern) -> i32)
+(define-foreign request-animation-frame
+  "window" "requestAnimationFrame"
+  (ref extern) -> none)
+(define-foreign timeout
+  "window" "setTimeout"
+  (ref extern) f64 -> i32)

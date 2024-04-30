@@ -18,17 +18,32 @@
 ;;;
 ;;; Code:
 
-(library (math)
-  (export random
-          clamp)
-  (import (scheme base)
-          (hoot ffi))
+;; (library (math)
+;;   (export random
+;;           clamp)
+;;   (import (scheme base)
+;;           (hoot ffi))
 
-  (define-foreign random
-    "math" "random"
-    -> f64)
+;;   (define-foreign random
+;;     "math" "random"
+;;     -> f64)
 
-  (define (clamp x min max)
-    (cond ((< x min) min)
-          ((> x max) max)
-          (else x))))
+;;   (define (clamp x min max)
+;;     (cond ((< x min) min)
+;;           ((> x max) max)
+;;           (else x))))
+
+(define-module (math)
+  #:pure
+  #:use-module (scheme base)
+  #:use-module (hoot ffi)
+  #:export (random clamp))
+
+(define-foreign random
+  "math" "random"
+  -> f64)
+
+(define (clamp x min max)
+  (cond ((< x min) min)
+        ((> x max) max)
+        (else x)))
