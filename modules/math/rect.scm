@@ -87,10 +87,6 @@
        (> (+ (rect-y a) (rect-height a)) (rect-y b))))
 
 (define (rect-clip a b)
-  ;; intersection.x = Math.max(rectangle1.x, rectangle2.x);
-  ;; intersection.width = Math.min(rectangle1.x + rectangle1.width, rectangle2.x + rectangle2.width) - intersection.x;
-  ;; intersection.y = Math.max(rectangle1.y, rectangle2.y);
-  ;; intersection.height = Math.min(rectangle1.y + rectangle1.height, rectangle2.y + rectangle2.height) - intersection.y;
   (let* ((x1 (max (rect-x a) (rect-x b)))
          (x2 (min (+ (rect-x a) (rect-width a))
                   (+ (rect-x b) (rect-width b))))
