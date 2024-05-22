@@ -6,7 +6,7 @@ Welcome to Ro-Shhhambo, an innovative rock-paper-scissors (RPS) tournament that 
 
 In Ro-Shhhambo, players compete by writing deterministic RPS strategies in a custom subset of LISP that is compatible with both the Spritely and Lurk programming environments. The game starts with each player submitting a "bias" first move, and then subsequent moves are determined by observing the full game history.
 
-Spritely's HOOT (Higher-Order Object Oriented Templates) is used for providing the game's user interface, while Endo is used for establishing game sessions with other players and exchanging proofs. Lurk's zero-knowledge proof capabilities allow players to prove their moves are valid without revealing their strategy source code, ensuring a private and fair tournament.
+Spritely's HOOT (Guile in wasm) is used for providing the game's user interface, while Endo is used for establishing game sessions with other players and exchanging proofs. Lurk's zero-knowledge proof capabilities allow players to prove their moves are valid without revealing their strategy source code, ensuring a private and fair tournament.
 
 ## Features
 
@@ -17,8 +17,8 @@ Spritely's HOOT (Higher-Order Object Oriented Templates) is used for providing t
 - Lurk zero-knowledge proofs for validating moves without revealing strategies
 - Potential for ongoing "king of the hill" style tournaments with entry fees and prize pools
 
-## Getting Started
 
+## Getting Started
 To get started with Ro-Shhhambo, you'll need to have the following installed:
 
 - [Spritely's HOOT](https://spritely.institute/news/make-a-game-with-hoot-for-the-lisp-game-jam.html)
