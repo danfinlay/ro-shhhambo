@@ -1,6 +1,6 @@
 # Ro-Shhhambo: The Private RPS Tournament
 
-Welcome to Ro-Shhhambo, an innovative rock-paper-scissors (RPS) tournament that combines the power of LISP, Spritely's HOOT, Endo, and Lurk to create a unique, privacy-focused gaming experience.
+Welcome to Ro-Shhhambo, an innovative rock-paper-scissors (RPS) tournament that combines the power of Spritely's HOOT, Endo, and Lurk to create a unique, privacy-focused gaming experience.
 
 ## Overview
 
@@ -21,10 +21,9 @@ Spritely's HOOT (Higher-Order Object Oriented Templates) is used for providing t
 
 To get started with Ro-Shhhambo, you'll need to have the following installed:
 
-- [LISP environment]
-- [Spritely's HOOT]
-- [Endo]
-- [Lurk zero-knowledge proof system]
+- [Spritely's HOOT](https://spritely.institute/news/make-a-game-with-hoot-for-the-lisp-game-jam.html)
+- [Endo](https://github.com/endojs/endo)
+- [Lurk zero-knowledge proof system](https://blog.lurk-lang.org/posts/prog-intro/) (See Functional Commitments)
 
 Clone the repository and follow the installation instructions in the [INSTALL.md](./INSTALL.md) file.
 
