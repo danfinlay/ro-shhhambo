@@ -1,4 +1,4 @@
-!(def fold (lambda (f acc list)
+!(defrec fold (lambda (f acc list)
   (if (eq list nil)
     acc
     (fold f (f acc (car list)) (cdr list)))))
@@ -6,15 +6,15 @@
 !(def reverse (lambda (list)
   (fold (lambda (acc x) (cons x acc)) nil list)))
 
-!(def make-list (lambda (n)
+!(defrec make-list (lambda (n)
   (if (<= n 0)
     nil
     (cons nil (make-list (- n 1))))))
 
-!(def length (lambda (list)
+!(defrec length (lambda (list)
   (if (eq list nil)
-    0
-    (+ 1 (length (cdr list))))))
+    0u64
+    (+ 1u64 (length (cdr list))))))
 
 !(def compete (lambda (strategy1 strategy2 round-count)
   (letrec ((play-round (lambda (history)
@@ -62,4 +62,4 @@
         'rock
         'scissors)))))
 
-(compete strategy1 strategy2 4)
+(emit (make-list 2))
