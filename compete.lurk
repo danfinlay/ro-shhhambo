@@ -1,0 +1,31 @@
+(define (compete strategy1 strategy2 round-count)
+  (define (play-round history)
+    (let ((move1 (strategy1 history))
+          (move2 (strategy2 history)))
+      (cons (list move1 move2) history)))
+
+  (define (winner move1 move2)
+    (cond
+      ((equal? move1 move2) 0)
+      ((and (equal? move1 'rock) (equal? move2 'scissors)) 1)
+      ((and (equal? move1 'paper) (equal? move2 'rock)) 1)
+      ((and (equal? move1 'scissors) (equal? move2 'paper)) 1)
+      (else 2)))
+
+  (define (count-wins history acc1 acc2)
+    (if (null? history)
+        (list acc1 acc2)
+        (let ((round (car history)))
+          (cond
+            ((= (winner (car round) (cadr round)) 1)
+             (count-wins (cdr history) (+ acc1 1) acc2))
+            ((= (winner (car round) (cadr round)) 2)
+             (count-wins (cdr history) acc1 (+ acc2 1)))
+            (else
+             (count-wins (cdr history) acc1 acc2))))))
+
+  (let ((history (reverse
+                   (fold play-round '() (make-list round-count)))))
+    (let ((win-counts (count-wins history 0 0)))
+      (list (if (> (car win-counts) (cadr win-counts)) 1 2)
+            history))))
