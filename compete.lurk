@@ -1,31 +1,65 @@
-(define (compete strategy1 strategy2 round-count)
-  (define (play-round history)
+!(def fold (lambda (f acc list)
+  (if (eq list nil)
+    acc
+    (fold f (f acc (car list)) (cdr list)))))
+
+!(def reverse (lambda (list)
+  (fold (lambda (acc x) (cons x acc)) nil list)))
+
+!(def make-list (lambda (n)
+  (if (<= n 0)
+    nil
+    (cons nil (make-list (- n 1))))))
+
+!(def length (lambda (list)
+  (if (eq list nil)
+    0
+    (+ 1 (length (cdr list))))))
+
+!(def compete (lambda (strategy1 strategy2 round-count)
+  (letrec ((play-round (lambda (history)
     (let ((move1 (strategy1 history))
           (move2 (strategy2 history)))
-      (cons (list move1 move2) history)))
-
-  (define (winner move1 move2)
-    (cond
-      ((equal? move1 move2) 0)
-      ((and (equal? move1 'rock) (equal? move2 'scissors)) 1)
-      ((and (equal? move1 'paper) (equal? move2 'rock)) 1)
-      ((and (equal? move1 'scissors) (equal? move2 'paper)) 1)
-      (else 2)))
-
-  (define (count-wins history acc1 acc2)
-    (if (null? history)
+      (cons (list move1 move2) history))))
+    (winner (lambda (move1 move2)
+      (if (eq move1 move2)
+        0
+        (if (eq (list move1 move2) '(rock scissors))
+          1
+          (if (eq (list move1 move2) '(paper rock))
+            1
+            (if (eq (list move1 move2) '(scissors paper))
+              1
+              2))))))
+    (count-wins (lambda (history acc1 acc2)
+      (if (eq history nil)
         (list acc1 acc2)
         (let ((round (car history)))
-          (cond
-            ((= (winner (car round) (cadr round)) 1)
-             (count-wins (cdr history) (+ acc1 1) acc2))
-            ((= (winner (car round) (cadr round)) 2)
-             (count-wins (cdr history) acc1 (+ acc2 1)))
-            (else
-             (count-wins (cdr history) acc1 acc2))))))
+          (if (= (winner (car round) (car (cdr round))) 1)
+            (count-wins (cdr history) (+ acc1 1) acc2)
+            (if (= (winner (car round) (car (cdr round))) 2)
+              (count-wins (cdr history) acc1 (+ acc2 1))
+              (count-wins (cdr history) acc1 acc2))))))))
+    (let ((history (reverse
+      (fold play-round nil (make-list round-count)))))
+      (let ((win-counts (count-wins history 0 0)))
+        (list (if (> (car win-counts) (car (cdr win-counts))) 1 2)
+              history))))))
 
-  (let ((history (reverse
-                   (fold play-round '() (make-list round-count)))))
-    (let ((win-counts (count-wins history 0 0)))
-      (list (if (> (car win-counts) (cadr win-counts)) 1 2)
-            history))))
+!(def strategy1 (lambda (history)
+  (let ((history-length (length history)))
+    (if (= (% history-length 3u64) 0u64)
+      'rock
+      (if (= (% history-length 3u64) 1u64)
+        'paper
+        'scissors)))))
+
+!(def strategy2 (lambda (history)
+  (let ((history-length (length history)))
+    (if (= (% history-length 3u64) 0u64)
+      'paper
+      (if (= (% history-length 3u64) 1u64)
+        'rock
+        'scissors)))))
+
+(compete strategy1 strategy2 4)
